@@ -1,0 +1,31 @@
+{
+  "name": "emojoy",
+  "version": "0.0.1",
+  "description": "An Useless Chatting App with Emojis",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "angularjs",
+    "mean",
+    "angular",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "varunzxzx",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.7.1",
+    "express": "^4.12.4",
+    "mongoose": "^4.0.5",
+    "socket.io": "^4.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

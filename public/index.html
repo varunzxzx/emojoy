@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="emojoyApp">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Emojoy</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha512-8bHTC73gkZ7rZ7vpqUQThUDhqcNFyYi2xgDgPDHc+GXVGHXq+xPjynxIopALmOPqzo9JZj0k6OqqewdGO3EsrQ=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body ng-controller="ChatController">
+    <div class="ui center aligned container">
+      <h1>Emojoy 💬</h1>
+
+      <div id="chatbox" class="ui placeholder segment">
+        <div id="chatarea">
+          <div id="online-people">
+            <h3>ONLINE 🟢</h3>
+            <div class="ui list">
+              <div class="item" ng-repeat="user in users">
+                <img
+                  class="ui avatar image"
+                  ng-src="/images/{{['1.png','2.png','3.jpg','4.jpg','5.png'][random()]}}"
+                />
+                <div class="content">
+                  <a class="header">{{user.username}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul>
+            <li ng-repeat="msg in messages">
+              <div
+                class="box {{ username === msg.from ? 'my-message' : 'other-message'}}"
+              >
+                <span class="content">{{ msg.body }}</span>
+                <span class="author">{{ msg.from }}</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="typingarea">
+          <ul>
+            <li ng-click="sendEmoji($event)" ng-repeat="emoji in emojis">
+              <span>{{emoji.emoji}}</span>
+            </li>
+          </ul>
+          <div class="ui fluid category search">
+            <div class="ui icon input">
+              <input class="prompt" type="text" placeholder="Search emojis..."
+              ng-model="emojiSearch" ng-change="searchEmoji()"
+              ng-model-options="{debounce: 100}" />
+              <i class="search icon"></i>
+            </div>
+            <div class="results"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="mini ui modal">
+      <div class="header">Enter Your Name</div>
+      <div class="content">
+        <div class="ui fluid input">
+          <input ng-model="username" type="text" placeholder="Enter here..." />
+        </div>
+      </div>
+      <div class="actions">
+        <button ng-click="addUser()" class="ui primary approve button">
+          Submit
+        </button>
+      </div>
+    </div>
+
+    <!-- angular libs -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"
+      integrity="sha512-7oYXeK0OxTFxndh0erL8FsjGvrl2VMDor6fVqzlLGfwOQQqTbYsGPv4ZZ15QHfSk80doyaM0ZJdvkyDcVO7KFA=="
+      crossorigin="anonymous"
+    ></script>
+    <!-- socket.io -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/socket-controller.js"></script>
+    <!-- angular app -->
+    <script src="js/app.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.min.js"
+      integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+      integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bubbly-bg@1.0.0/dist/bubbly-bg.js"></script>
+    <script>
+      bubbly();
+    </script>
+  </body>
+</html>
